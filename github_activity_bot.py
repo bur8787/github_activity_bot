@@ -60,22 +60,18 @@ https://github.com/${github_username}"
 
 message = message_1 + message_2
 
-CK = ''                             # Consumer Key
-CS = ''         # Consumer Secret
-AT = '' # Access Token
-AS = ''         # Accesss Token Secert
+CK = ''
+CS = ''
+AT = ''
+AS = ''
 
-# ツイート投稿用のURL
 url = "https://api.twitter.com/1.1/statuses/update.json"
 
-# ツイート本文
 params = {"status": message}
 
-# OAuth認証で POST method で投稿
 twitter = OAuth1Session(CK, CS, AT, AS)
 req = twitter.post(url, params = params)
 
-# レスポンスを確認
 if req.status_code == 200:
     print ("OK")
 else:
