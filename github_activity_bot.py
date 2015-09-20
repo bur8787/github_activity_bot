@@ -44,7 +44,7 @@ last_commited_date = sorted_list[-1]
 
 today = date.today()
 
-days_ago = today - last_commited_date
+days_ago = (today - last_commited_date).days
 
 message_1 = ""
 
@@ -53,7 +53,7 @@ if days_ago == 0:
 elif days_ago == 1:
     message_1 = "It\'s yesterday"
 else:
-    message_1 = "It\'s " + str(days_ago.days) + "days"
+    message_1 = "It\'s " + str(days_ago) + "days"
 
 message_2 = " that I last pushed to GitHub. \n\
 https://github.com/${github_username}"
