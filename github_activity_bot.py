@@ -3,7 +3,7 @@
 
 from requests_oauthlib import OAuth1Session
 from xml.etree import ElementTree as ET 
-from datetime import date 
+from datetime import date,datetime
 import urllib2
 import os
 from string import Template
@@ -49,7 +49,8 @@ sorted_list = sorted(act_date_list)
 
 last_commited_date = sorted_list[-1]
 
-today = date.today()
+today_datetime = datetime.today()
+today = today_datetime.date()
 
 days_ago = (today - last_commited_date).days
 
@@ -63,7 +64,8 @@ else:
     message_1 = "It\'s " + str(days_ago) + "days"
 
 message_2 = Template(" that I last pushed to GitHub. \n\
-https://github.com/${GITHUB_USERNAME}").substitute(GITHUB_USERNAME = env.get('GITHUB_USERNAME'))
+https://github.com/${GITHUB_USERNAME}\n\
+at ${today_datetime}").substitute(GITHUB_USERNAME = env.get('GITHUB_USERNAME'),today_datetime = today_datetime)
 
 message = message_1 + message_2
 
