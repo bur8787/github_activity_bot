@@ -51,7 +51,6 @@ last_commited_date = sorted_list[-1]
 
 today_datetime = datetime.today()
 today = today_datetime.date()
-
 days_ago = (today - last_commited_date).days
 
 message_1 = ""
@@ -65,7 +64,8 @@ else:
 
 message_2 = Template(" that I last pushed to GitHub. \n\
 https://github.com/${GITHUB_USERNAME}\n\
-at ${today_datetime}").substitute(GITHUB_USERNAME = env.get('GITHUB_USERNAME'),today_datetime = today_datetime)
+\n\
+at ${today_datetime}").substitute(GITHUB_USERNAME = env.get('GITHUB_USERNAME'),today_datetime = today_datetime.strftime("%A, %d.%B %Y %H:%M"))
 
 message = message_1 + message_2
 
