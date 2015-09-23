@@ -84,5 +84,5 @@ if req.status_code == 200:
     print ("OK")
     sys.exit(0)
 else:
+    print req.text
     sys.exit("Error: %d" % req.status_code)
-    
