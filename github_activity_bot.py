@@ -2,11 +2,16 @@
 # -*- coding: utf-8 -*-
 
 from requests_oauthlib import OAuth1Session
-import urllib2
 from xml.etree import ElementTree as ET 
 from datetime import date 
+import urllib2
+import os
 
-response = urllib2.urlopen('https://github.com/users/${github_username}/contributions')
+env = os.environ
+
+github_contributions_url = Template('https://github.com/users/${GITHUB_USERNAME}/contributions').substitute(GITHUB_USERNAME = env.get(GITHUB_USERNAME))
+
+response = urllib2.urlopen(github_contributions_url)
 html = response.read()
 
 elements = ET.XML(html)
@@ -55,15 +60,16 @@ elif days_ago == 1:
 else:
     message_1 = "It\'s " + str(days_ago) + "days"
 
-message_2 = " that I last pushed to GitHub. \n\
-https://github.com/${github_username}"
+message_2 = Template(" that I last pushed to GitHub. \n\
+https://github.com/${GITHUB_USERNAME}").substitute(GITHUB_USERNAME = env.get('GITHUB_USERNAME'))
 
 message = message_1 + message_2
 
-CK = ''
-CS = ''
-AT = ''
-AS = ''
+
+CK = env.get('CONSUMER_KEY') 
+CS = env.get('CONSUMER_SECRET')
+AT = env.get('ACCESS_TOKEN')
+AS = env.get('ACCESS_TOKEN_SECRET')
 
 url = "https://api.twitter.com/1.1/statuses/update.json"
 
