@@ -10,7 +10,7 @@ from string import Template
 
 env = os.environ
 
-github_contributions_url = Template('https://github.com/users/${GITHUB_USERNAME}/contributions').substitute(GITHUB_USERNAME = env.get(GITHUB_USERNAME))
+github_contributions_url = Template('https://github.com/users/${GITHUB_USERNAME}/contributions').substitute(GITHUB_USERNAME = env.get('GITHUB_USERNAME'))
 
 response = urllib2.urlopen(github_contributions_url)
 html = response.read()
