@@ -7,6 +7,7 @@ from datetime import date
 import urllib2
 import os
 from string import Template
+import sys
 
 env = os.environ
 
@@ -81,5 +82,7 @@ req = twitter.post(url, params = params)
 
 if req.status_code == 200:
     print ("OK")
+    sys.exit(0)
 else:
-    print ("Error: %d" % req.status_code)
+    sys.exit("Error: %d" % req.status_code)
+    
