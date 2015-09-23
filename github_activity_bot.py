@@ -6,6 +6,7 @@ from xml.etree import ElementTree as ET
 from datetime import date 
 import urllib2
 import os
+import Template from string
 
 env = os.environ
 
